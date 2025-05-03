@@ -1,27 +1,18 @@
+// src/components/flow/DiamondNode.tsx
+import { NodeProps, Handle, Position } from 'reactflow';
+import { DiamondNodeData } from './types';
 
-import React, { memo } from 'react';
-import { Handle, Position, NodeProps } from '@xyflow/react';
-
-// Define the type for the node data
-interface DiamondNodeData {
-  label?: string;
-  subtitle?: string;
-}
-
-// Create a custom props type that accepts our data shape
-type DiamondNodeProps = NodeProps<DiamondNodeData>;
-
-const DiamondNode = memo(({ data }: DiamondNodeProps) => {
+export function DiamondNode({ data, selected }: NodeProps<DiamondNodeData, string>) {
   return (
-    <div className="react-flow__node-diamond">
-      <Handle type="target" position={Position.Top} />
-      <div className="diamond-content">
-        <div>{data?.label || ''}</div>
-        <small>{data?.subtitle || ''}</small>
+    <div className={selected ? 'ring-2 ring-blue-500' : ''}>
+      <Handle type="target" position={Position.Top} id="top" />
+      <div className="p-4 transform rotate-45 bg-white border shadow">
+        <div className="rotate-[-45deg]">
+          <h4>{data.label}</h4>
+          <small>{data.subtitle}</small>
+        </div>
       </div>
-      <Handle type="source" position={Position.Bottom} />
+      <Handle type="source" position={Position.Bottom} id="bottom" />
     </div>
   );
-});
-
-export default DiamondNode;
+}
