@@ -8,7 +8,7 @@ interface EndNodeData {
   // and makes it consistent with other node components
 }
 
-const EndNode = memo<NodeProps<{}>>(({ data }) => {
+const EndNode = memo(({ data }: NodeProps<EndNodeData>) => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />

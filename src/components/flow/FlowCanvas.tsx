@@ -22,7 +22,7 @@ import RightToolbar from '../panels/RightToolbar';
 import '@xyflow/react/dist/style.css';
 
 // Define custom node types
-const nodeTypes = {
+const nodeTypes: NodeTypes = {
   diamond: DiamondNode,
   process: ProcessNode,
   start: StartNode,

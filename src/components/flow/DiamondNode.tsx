@@ -8,7 +8,7 @@ interface DiamondNodeData {
   subtitle?: string;
 }
 
-const DiamondNode = memo<NodeProps<{ label?: string; subtitle?: string }>>(({ data }) => {
+const DiamondNode = memo(({ data }: NodeProps<DiamondNodeData>) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />

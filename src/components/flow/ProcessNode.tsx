@@ -12,7 +12,7 @@ interface ProcessNodeData {
   color?: string;
 }
 
-const ProcessNode = memo<NodeProps<ProcessNodeData>>(({ data }) => {
+const ProcessNode = memo(({ data }: NodeProps<ProcessNodeData>) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName
