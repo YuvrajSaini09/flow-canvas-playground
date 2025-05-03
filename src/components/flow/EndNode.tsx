@@ -1,25 +1,12 @@
+// src/components/flow/EndNode.tsx
+import { NodeProps, Handle, Position } from 'reactflow';
+import { EndNodeData } from './types';
 
-import React, { memo } from 'react';
-import { Handle, Position, NodeProps } from '@xyflow/react';
-
-// Define the type for the data property
-interface EndNodeData {
-  // Even if empty, defining this interface is good practice
-  // and makes it consistent with other node components
-}
-
-// Create a custom props type that accepts our data shape
-type EndNodeProps = NodeProps<EndNodeData>;
-
-const EndNode = memo(({ data }: EndNodeProps) => {
+export function EndNode({ data, selected }: NodeProps<EndNodeData, string>) {
   return (
-    <div className="flex flex-col items-center">
-      <Handle type="target" position={Position.Top} />
-      <div className="w-6 h-6 rounded-full flex items-center justify-center border-2 border-gray-400">
-        <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-      </div>
+    <div className={`p-4 rounded-full bg-red-100 ${selected ? 'ring-2 ring-red-500' : ''}`}>
+      <Handle type="target" position={Position.Top} id="end" />
+      <strong>{data.label}</strong>
     </div>
   );
-});
-
-export default EndNode;
+}
