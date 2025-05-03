@@ -12,6 +12,11 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ onClose }) => {
 
   if (!selectedNode) return null;
 
+  // Safely access label data with type checking
+  const nodeLabel = selectedNode.data && typeof selectedNode.data.label === 'string' 
+    ? selectedNode.data.label 
+    : 'Node Details';
+
   return (
     <div className="details-panel">
       <div className="panel-close" onClick={onClose}>
@@ -19,10 +24,10 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ onClose }) => {
       </div>
       
       <h3 className="text-lg font-semibold mb-4">
-        {selectedNode.data?.label ? String(selectedNode.data.label) : 'Node Details'}
+        {nodeLabel}
       </h3>
       
-      {selectedNode.data?.label === 'Update Salesforce via API' && (
+      {nodeLabel === 'Update Salesforce via API' && (
         <>
           <p className="text-sm text-gray-600 mb-4">
             Next to the component's name, click Edit, then select the Version Settings tab in the Version field for Salesforce API, select version 45.0 or later.
@@ -36,7 +41,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ onClose }) => {
         </>
       )}
       
-      {selectedNode.data?.label !== 'Update Salesforce via API' && (
+      {nodeLabel !== 'Update Salesforce via API' && (
         <div className="text-sm text-gray-600">
           <p>ID: {selectedNode.id}</p>
           <p>Type: {selectedNode.type}</p>

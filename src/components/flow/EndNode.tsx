@@ -8,7 +8,10 @@ interface EndNodeData {
   // and makes it consistent with other node components
 }
 
-const EndNode = memo(({ data }: NodeProps<EndNodeData>) => {
+// Create a custom props type that accepts our data shape
+type EndNodeProps = NodeProps<EndNodeData>;
+
+const EndNode = memo(({ data }: EndNodeProps) => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />

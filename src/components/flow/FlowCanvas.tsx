@@ -1,4 +1,3 @@
-
 import React, { useRef, useCallback } from 'react';
 import {
   ReactFlow,
@@ -22,7 +21,7 @@ import RightToolbar from '../panels/RightToolbar';
 import '@xyflow/react/dist/style.css';
 
 // Define custom node types
-const nodeTypes: NodeTypes = {
+const nodeTypes: Record<string, React.ComponentType<any>> = {
   diamond: DiamondNode,
   process: ProcessNode,
   start: StartNode,

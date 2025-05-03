@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Database, FileText, RotateCw, Mail } from 'lucide-react';
 
-// Define the type for the data property specifically
+// Define the type for the node data
 interface ProcessNodeData {
   label?: string;
   subtitle?: string;
@@ -12,7 +12,10 @@ interface ProcessNodeData {
   color?: string;
 }
 
-const ProcessNode = memo(({ data }: NodeProps<ProcessNodeData>) => {
+// Create a custom props type that accepts our data shape
+type ProcessNodeProps = NodeProps<ProcessNodeData>;
+
+const ProcessNode = memo(({ data }: ProcessNodeProps) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName

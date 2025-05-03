@@ -2,13 +2,16 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 
-// Define the type for the data property specifically
+// Define the type for the node data
 interface DiamondNodeData {
   label?: string;
   subtitle?: string;
 }
 
-const DiamondNode = memo(({ data }: NodeProps<DiamondNodeData>) => {
+// Create a custom props type that accepts our data shape
+type DiamondNodeProps = NodeProps<DiamondNodeData>;
+
+const DiamondNode = memo(({ data }: DiamondNodeProps) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />

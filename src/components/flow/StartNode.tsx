@@ -2,12 +2,15 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 
-// Define the type for the data property specifically
+// Define the type for the node data
 interface StartNodeData {
   label?: string;
 }
 
-const StartNode = memo(({ data }: NodeProps<StartNodeData>) => {
+// Create a custom props type that accepts our data shape
+type StartNodeProps = NodeProps<StartNodeData>;
+
+const StartNode = memo(({ data }: StartNodeProps) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>
