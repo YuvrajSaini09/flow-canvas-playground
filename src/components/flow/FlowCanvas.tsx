@@ -37,13 +37,13 @@ const FlowCanvas: React.FC = () => {
     setShowDetailsPanel,
   } = useStore();
 
-  // Define nodeTypes as a regular object with explicit type annotation
-  const nodeTypes: NodeTypes = {
+  // Define nodeTypes with correct typing
+  const nodeTypes = {
     diamond: DiamondNode,
     process: ProcessNode,
     start: StartNode,
     end: EndNode,
-  };
+  } as NodeTypes;
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
