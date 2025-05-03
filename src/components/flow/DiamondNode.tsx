@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { DiamondNodeData } from './types';
 
-const DiamondNode = memo(({ data }: NodeProps) => {
+const DiamondNode = memo(({ data }: NodeProps<DiamondNodeData>) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />
