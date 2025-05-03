@@ -2,6 +2,7 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 
+// Define the type for the data property specifically
 interface DiamondNodeData {
   label?: string;
   subtitle?: string;

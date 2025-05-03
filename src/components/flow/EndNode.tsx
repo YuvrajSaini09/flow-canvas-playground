@@ -2,7 +2,13 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 
-const EndNode: React.FC<NodeProps> = ({ data }) => {
+// Define the type for the data property
+interface EndNodeData {
+  // Even if empty, defining this interface is good practice
+  // and makes it consistent with other node components
+}
+
+const EndNode: React.FC<NodeProps<EndNodeData>> = () => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />

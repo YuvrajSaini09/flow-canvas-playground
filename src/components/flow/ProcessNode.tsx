@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Database, FileText, RotateCw, Mail } from 'lucide-react';
 
+// Define the type for the data property specifically
 interface ProcessNodeData {
   label?: string;
   subtitle?: string;
@@ -36,7 +37,7 @@ const ProcessNode: React.FC<NodeProps<ProcessNodeData>> = ({ data }) => {
     <div className={`react-flow__node-process ${bgClass}`}>
       <Handle type="target" position={Position.Top} />
       {data?.iconName && (
-        <div className="node-icon" style={{ color: data?.color }}>
+        <div className="node-icon" style={{ color: data?.color || undefined }}>
           {renderIcon()}
         </div>
       )}
