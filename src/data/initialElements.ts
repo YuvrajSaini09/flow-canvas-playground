@@ -3,13 +3,8 @@ import {
   Node,
   Edge,
 } from '@xyflow/react';
-import {
-  Database,
-  FileText,
-  RotateCw,
-  Mail,
-} from 'lucide-react';
 
+// We'll reference icons by name instead of JSX elements
 export const initialNodes: Node[] = [
   {
     id: 'start',
@@ -42,7 +37,7 @@ export const initialNodes: Node[] = [
     position: { x: 335, y: 230 },
     data: {
       label: 'Execute Robotic Process',
-      icon: <RotateCw />,
+      iconName: 'RotateCw',
     },
   },
   {
@@ -51,7 +46,7 @@ export const initialNodes: Node[] = [
     position: { x: 530, y: 230 },
     data: {
       label: 'Start AI Doc Extraction',
-      icon: <FileText />,
+      iconName: 'FileText',
       bgClass: 'lime-bg',
     },
   },
@@ -61,7 +56,7 @@ export const initialNodes: Node[] = [
     position: { x: 710, y: 230 },
     data: {
       label: 'Update Salesforce via API',
-      icon: <Database />,
+      iconName: 'Database',
     },
   },
   {
@@ -88,7 +83,7 @@ export const initialNodes: Node[] = [
     position: { x: 285, y: 480 },
     data: {
       label: 'Send Warning Email',
-      icon: <Mail />,
+      iconName: 'Mail',
       bgClass: 'lime-bg',
     },
   },
@@ -98,7 +93,7 @@ export const initialNodes: Node[] = [
     position: { x: 390, y: 480 },
     data: {
       label: 'Send DocuSign for Signature',
-      icon: <FileText />,
+      iconName: 'FileText',
     },
   },
   {
