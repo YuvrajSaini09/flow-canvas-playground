@@ -8,7 +8,7 @@ interface DiamondNodeData {
   subtitle?: string;
 }
 
-const DiamondNode: React.FC<NodeProps<DiamondNodeData>> = ({ data }) => {
+const DiamondNode = memo<NodeProps<{ label?: string; subtitle?: string }>>(({ data }) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />
@@ -19,6 +19,6 @@ const DiamondNode: React.FC<NodeProps<DiamondNodeData>> = ({ data }) => {
       <Handle type="source" position={Position.Bottom} />
     </div>
   );
-};
+});
 
-export default memo(DiamondNode);
+export default DiamondNode;

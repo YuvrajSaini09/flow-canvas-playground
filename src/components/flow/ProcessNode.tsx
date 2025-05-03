@@ -12,7 +12,7 @@ interface ProcessNodeData {
   color?: string;
 }
 
-const ProcessNode: React.FC<NodeProps<ProcessNodeData>> = ({ data }) => {
+const ProcessNode = memo<NodeProps<ProcessNodeData>>(({ data }) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName
@@ -48,6 +48,6 @@ const ProcessNode: React.FC<NodeProps<ProcessNodeData>> = ({ data }) => {
       <Handle type="source" position={Position.Bottom} />
     </div>
   );
-};
+});
 
-export default memo(ProcessNode);
+export default ProcessNode;

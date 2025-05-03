@@ -7,7 +7,7 @@ interface StartNodeData {
   label?: string;
 }
 
-const StartNode: React.FC<NodeProps<StartNodeData>> = ({ data }) => {
+const StartNode = memo<NodeProps<StartNodeData>>(({ data }) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>
@@ -15,6 +15,6 @@ const StartNode: React.FC<NodeProps<StartNodeData>> = ({ data }) => {
       <Handle type="source" position={Position.Bottom} />
     </div>
   );
-};
+});
 
-export default memo(StartNode);
+export default StartNode;

@@ -8,7 +8,7 @@ interface EndNodeData {
   // and makes it consistent with other node components
 }
 
-const EndNode: React.FC<NodeProps<EndNodeData>> = () => {
+const EndNode = memo<NodeProps<{}>>(({ data }) => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />
@@ -17,6 +17,6 @@ const EndNode: React.FC<NodeProps<EndNodeData>> = () => {
       </div>
     </div>
   );
-};
+});
 
-export default memo(EndNode);
+export default EndNode;

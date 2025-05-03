@@ -19,7 +19,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ onClose }) => {
       </div>
       
       <h3 className="text-lg font-semibold mb-4">
-        {selectedNode.data?.label || 'Node Details'}
+        {selectedNode.data?.label ? String(selectedNode.data.label) : 'Node Details'}
       </h3>
       
       {selectedNode.data?.label === 'Update Salesforce via API' && (
