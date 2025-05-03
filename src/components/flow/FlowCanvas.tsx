@@ -15,7 +15,7 @@ import DiamondNode from './DiamondNode';
 import ProcessNode from './ProcessNode';
 import StartNode from './StartNode';
 import EndNode from './EndNode';
-import { v4 as uuidv4 } from '@xyflow/react';
+import { v4 as uuidv4 } from 'uuid';
 import DetailsPanel from '../panels/DetailsPanel';
 import RightToolbar from '../panels/RightToolbar';
 

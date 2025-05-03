@@ -28,13 +28,13 @@ const ProcessNode: React.FC<NodeProps> = ({ data }) => {
     <div className={`react-flow__node-process ${bgClass}`}>
       <Handle type="target" position={Position.Top} />
       {data.iconName && (
-        <div className="node-icon" style={{ color: data.color }}>
+        <div className="node-icon" style={{ color: data.color || undefined }}>
           {renderIcon()}
         </div>
       )}
-      <div className="node-title">{data.label}</div>
+      <div className="node-title">{data.label || ''}</div>
       {data.subtitle && (
-        <div className="node-subtitle">{data.subtitle}</div>
+        <div className="node-subtitle">{data.subtitle || ''}</div>
       )}
       <Handle type="source" position={Position.Bottom} />
     </div>
