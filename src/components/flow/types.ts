@@ -1,6 +1,4 @@
 
-import { Node } from "@xyflow/react";
-
 // Define the data type for each node type
 export interface NodeData {
   label?: string;
