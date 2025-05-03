@@ -1,56 +1,20 @@
+// src/components/flow/ProcessNode.tsx
+import { NodeProps, Handle, Position } from 'reactflow';
+import { ProcessNodeData } from './types';
+import { Icon } from 'your-icon-library'; // adjust as needed
 
-import React, { memo } from 'react';
-import { Handle, Position, NodeProps } from '@xyflow/react';
-import { Database, FileText, RotateCw, Mail } from 'lucide-react';
-
-// Define the type for the node data
-interface ProcessNodeData {
-  label?: string;
-  subtitle?: string;
-  bgClass?: string;
-  iconName?: string;
-  color?: string;
-}
-
-// Create a custom props type that accepts our data shape
-type ProcessNodeProps = NodeProps<ProcessNodeData>;
-
-const ProcessNode = memo(({ data }: ProcessNodeProps) => {
-  const bgClass = data?.bgClass || '';
-  
-  // Function to render the appropriate icon based on iconName
-  const renderIcon = () => {
-    if (!data?.iconName) return null;
-    
-    switch (data.iconName) {
-      case 'RotateCw':
-        return <RotateCw />;
-      case 'FileText':
-        return <FileText />;
-      case 'Database':
-        return <Database />;
-      case 'Mail':
-        return <Mail />;
-      default:
-        return null;
-    }
-  };
-  
+export function ProcessNode({ data, selected }: NodeProps<ProcessNodeData, string>) {
   return (
-    <div className={`react-flow__node-process ${bgClass}`}>
-      <Handle type="target" position={Position.Top} />
-      {data?.iconName && (
-        <div className="node-icon" style={{ color: data?.color || undefined }}>
-          {renderIcon()}
+    <div className={`p-4 rounded-lg shadow ${data.bgClass} ${selected ? 'ring-2 ring-blue-500' : ''}`}>
+      <Handle type="target" position={Position.Left} id="in" />
+      <div className="flex items-center">
+        <Icon name={data.iconName} className={`text-${data.color}`} />
+        <div className="ml-2">
+          <h5>{data.label}</h5>
+          <p>{data.subtitle}</p>
         </div>
-      )}
-      <div className="node-title">{data?.label || ''}</div>
-      {data?.subtitle && (
-        <div className="node-subtitle">{data.subtitle}</div>
-      )}
-      <Handle type="source" position={Position.Bottom} />
+      </div>
+      <Handle type="source" position={Position.Right} id="out" />
     </div>
   );
-});
-
-export default ProcessNode;
+}
