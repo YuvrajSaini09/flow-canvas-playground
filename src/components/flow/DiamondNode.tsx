@@ -9,7 +9,7 @@ interface DiamondNodeData {
   branchId?: string;
 }
 
-const DiamondNode = memo(({ data }: NodeProps<DiamondNodeData>) => {
+const DiamondNode = memo(({ data }: NodeProps<{ label?: string; subtitle?: string; branchId?: string }>) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />

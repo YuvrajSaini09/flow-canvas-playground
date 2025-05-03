@@ -7,7 +7,7 @@ interface StartNodeData {
   label?: string;
 }
 
-const StartNode = memo(({ data }: NodeProps<StartNodeData>) => {
+const StartNode = memo(({ data }: NodeProps<{ label?: string }>) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>

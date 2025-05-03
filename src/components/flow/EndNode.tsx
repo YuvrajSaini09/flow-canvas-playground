@@ -7,7 +7,7 @@ interface EndNodeData {
   label?: string;
 }
 
-const EndNode = memo(({ data }: NodeProps<EndNodeData>) => {
+const EndNode = memo(({ data }: NodeProps<{ label?: string }>) => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />
