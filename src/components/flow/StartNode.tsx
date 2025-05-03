@@ -2,7 +2,11 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 
-const StartNode: React.FC<NodeProps> = ({ data }) => {
+interface StartNodeData {
+  label?: string;
+}
+
+const StartNode: React.FC<NodeProps<StartNodeData>> = ({ data }) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>

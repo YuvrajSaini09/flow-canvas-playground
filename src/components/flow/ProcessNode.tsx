@@ -3,7 +3,15 @@ import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Database, FileText, RotateCw, Mail } from 'lucide-react';
 
-const ProcessNode: React.FC<NodeProps> = ({ data }) => {
+interface ProcessNodeData {
+  label?: string;
+  subtitle?: string;
+  bgClass?: string;
+  iconName?: string;
+  color?: string;
+}
+
+const ProcessNode: React.FC<NodeProps<ProcessNodeData>> = ({ data }) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName
@@ -28,7 +36,7 @@ const ProcessNode: React.FC<NodeProps> = ({ data }) => {
     <div className={`react-flow__node-process ${bgClass}`}>
       <Handle type="target" position={Position.Top} />
       {data?.iconName && (
-        <div className="node-icon" style={{ color: data?.color ? data.color : undefined }}>
+        <div className="node-icon" style={{ color: data?.color }}>
           {renderIcon()}
         </div>
       )}
