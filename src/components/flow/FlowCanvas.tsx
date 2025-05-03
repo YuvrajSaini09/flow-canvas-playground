@@ -1,158 +1,86 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState } from 'react';
+import ReactFlow, { Node, Edge, Background, Controls } from 'reactflow';
+import 'reactflow/dist/style.css';
+
+// Import your custom node components
+import { DiamondNode } from './DiamondNode';
+import { StartNode } from './StartNode';
+import { ProcessNode } from './ProcessNode';
+import { EndNode } from './EndNode';
+
+// Import your shared data types
 import {
-  ReactFlow,
-  Background,
-  Controls,
-  Panel,
-  useReactFlow,
-  BackgroundVariant,
-  Node,
-  NodeTypes
-} from '@xyflow/react';
-import useStore from '../../store/useStore';
-import DiamondNode from './DiamondNode';
-import ProcessNode from './ProcessNode';
-import StartNode from './StartNode';
-import EndNode from './EndNode';
-import { v4 as uuidv4 } from 'uuid';
-import DetailsPanel from '../panels/DetailsPanel';
-import RightToolbar from '../panels/RightToolbar';
+  DiamondNodeData,
+  StartNodeData,
+  ProcessNodeData,
+  EndNodeData,
+} from './types';
 
-import '@xyflow/react/dist/style.css';
+// Define the union type of all possible node data shapes
+type FlowNodeData = DiamondNodeData | StartNodeData | ProcessNodeData | EndNodeData;
 
-// Define custom node types
-const nodeTypes: Record<string, React.ComponentType<any>> = {
-  diamond: DiamondNode,
-  process: ProcessNode,
-  start: StartNode,
-  end: EndNode,
-};
-
-const FlowCanvas: React.FC = () => {
-  const reactFlowWrapper = useRef<HTMLDivElement>(null);
-  const { getViewport } = useReactFlow();
-  const {
-    nodes,
-    edges,
-    onNodesChange,
-    onEdgesChange,
-    onConnect,
-    addNode,
-    selectNode,
-    selectedNode,
-    showDetailsPanel,
-    setShowDetailsPanel,
-  } = useStore();
-
-  const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-  }, []);
-
-  const onDrop = useCallback(
-    (event: React.DragEvent<HTMLDivElement>) => {
-      event.preventDefault();
-
-      if (!reactFlowWrapper.current) return;
-
-      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-      const dataStr = event.dataTransfer.getData('application/reactflow');
-      
-      if (!dataStr) return;
-      
-      try {
-        const data = JSON.parse(dataStr);
-        
-        const position = getViewport();
-        const x = event.clientX - reactFlowBounds.left - (position?.x || 0);
-        const y = event.clientY - reactFlowBounds.top - (position?.y || 0);
-
-        const nodeId = uuidv4();
-        let nodeData = {
-          id: nodeId,
-          type: data.type,
-          position: { x, y },
-          data: { 
-            ...data,
-            label: data.label,
-            // Convert icon to iconName to match our ProcessNode component
-            iconName: data.icon ? data.icon : undefined,
-          },
-        };
-
-        // Special case for nodes that need unique styling
-        if (data.label === "AI Doc Extraction" || data.label === "Send Warning Email") {
-          nodeData.data.bgClass = "lime-bg";
-        } else if (data.label === "Data Imap") {
-          nodeData.data.bgClass = "blue-bg";
-        }
-
-        addNode(nodeData as Node);
-      } catch (error) {
-        console.error('Error parsing dropped data:', error);
-      }
+// Create the initial nodes array with id, position, type, and data
+const initialNodes: Node<FlowNodeData, string>[] = [
+  {
+    id: 'start-1',
+    type: 'start',
+    position: { x: 0, y: 0 },
+    data: { label: 'Begin' },
+  },
+  {
+    id: 'diamond-1',
+    type: 'diamond',
+    position: { x: 200, y: 0 },
+    data: { label: 'Check', subtitle: 'Is it true?' },
+  },
+  {
+    id: 'process-1',
+    type: 'process',
+    position: { x: 400, y: 0 },
+    data: {
+      label: 'Do Work',
+      subtitle: 'Processing step',
+      bgClass: 'bg-green-100',
+      iconName: 'cog',
+      color: 'green-600',
     },
-    [addNode, getViewport]
-  );
+  },
+  {
+    id: 'end-1',
+    type: 'end',
+    position: { x: 600, y: 0 },
+    data: { label: 'Finish' },
+  },
+];
 
-  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
-    selectNode(node);
-    setShowDetailsPanel(true);
-  }, [selectNode, setShowDetailsPanel]);
+// (Optional) initial edges to connect nodes
+const initialEdges: Edge<string>[] = [
+  { id: 'e1-2', source: 'start-1', target: 'diamond-1', type: 'smoothstep' },
+  { id: 'e2-3', source: 'diamond-1', target: 'process-1', type: 'smoothstep' },
+  { id: 'e3-4', source: 'process-1', target: 'end-1', type: 'smoothstep' },
+];
 
-  const closeDetailsPanel = useCallback(() => {
-    setShowDetailsPanel(false);
-    selectNode(null);
-  }, [setShowDetailsPanel, selectNode]);
+export default function FlowCanvas() {
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
 
   return (
-    <div className="w-full h-full relative" ref={reactFlowWrapper}>
+    <div style={{ width: '100%', height: '500px' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onDrop={onDrop}
-        onDragOver={onDragOver}
-        onNodeClick={onNodeClick}
-        nodeTypes={nodeTypes}
-        fitView
-        nodesDraggable
-        elementsSelectable
-        deleteKeyCode={["Backspace", "Delete"]}
-        minZoom={0.2}
-        maxZoom={4}
+        onNodesChange={setNodes}
+        onEdgesChange={setEdges}
+        nodeTypes={{
+          start: StartNode,
+          diamond: DiamondNode,
+          process: ProcessNode,
+          end: EndNode,
+        }}
       >
-        <Background variant={BackgroundVariant.Dots} gap={15} size={1} />
+        <Background />
         <Controls />
-        
-        <Panel position="top-right" className="flex items-center gap-2">
-          <button className="bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium flex items-center gap-2">
-            Submit New Project App
-          </button>
-        </Panel>
       </ReactFlow>
-      
-      <RightToolbar />
-      
-      {showDetailsPanel && selectedNode && (
-        <DetailsPanel onClose={closeDetailsPanel} />
-      )}
-      
-      <div className="code-circuit">
-        <svg width="150" height="150" viewBox="0 0 150 150">
-          <rect x="0" y="0" width="150" height="150" fill="none" />
-          <path d="M10,75 L50,75 L60,50 L90,100 L100,75 L140,75" 
-                stroke="#6366f1" strokeWidth="2" fill="none" />
-          <path d="M10,50 L30,50 L40,25 L60,75 L80,25 L100,50 L140,50" 
-                stroke="#6366f1" strokeWidth="2" fill="none" />
-          <path d="M10,100 L40,100 L50,125 L70,75 L90,125 L110,100 L140,100" 
-                stroke="#6366f1" strokeWidth="2" fill="none" />
-        </svg>
-      </div>
     </div>
   );
-};
-
-export default FlowCanvas;
+}
