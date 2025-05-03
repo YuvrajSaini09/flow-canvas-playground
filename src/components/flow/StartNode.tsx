@@ -1,13 +1,9 @@
 
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
+import { StartNodeData } from './types';
 
-// Define the type for the node data
-interface StartNodeData {
-  label?: string;
-}
-
-const StartNode = memo(({ data }: NodeProps<{ label?: string }>) => {
+const StartNode = memo(({ data }: NodeProps<StartNodeData>) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>

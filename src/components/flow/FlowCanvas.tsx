@@ -1,4 +1,3 @@
-
 import React, { useRef, useCallback, useMemo } from 'react';
 import {
   ReactFlow,
@@ -39,14 +38,12 @@ const FlowCanvas: React.FC = () => {
   } = useStore();
 
   // Define nodeTypes using useMemo to prevent unnecessary re-renders
-  const nodeTypes = useMemo<NodeTypes>(() => {
-    return {
-      diamond: DiamondNode,
-      process: ProcessNode,
-      start: StartNode,
-      end: EndNode,
-    };
-  }, []);
+  const nodeTypes = useMemo(() => ({
+    diamond: DiamondNode,
+    process: ProcessNode,
+    start: StartNode,
+    end: EndNode,
+  }), []);
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
