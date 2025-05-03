@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useMemo } from 'react';
+import React, { useRef, useCallback } from 'react';
 import {
   ReactFlow,
   Background,
@@ -37,8 +37,8 @@ const FlowCanvas: React.FC = () => {
     setShowDetailsPanel,
   } = useStore();
 
-  // Define nodeTypes as a regular object, not using useMemo to avoid type issues
-  const nodeTypes = {
+  // Define nodeTypes as a regular object with explicit type annotation
+  const nodeTypes: NodeTypes = {
     diamond: DiamondNode,
     process: ProcessNode,
     start: StartNode,

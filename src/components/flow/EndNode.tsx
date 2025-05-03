@@ -1,14 +1,9 @@
 
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
+import { EndNodeData } from './types';
 
-interface EndNodeProps {
-  data: {
-    label?: string;
-  }
-}
-
-const EndNode = memo(({ data }: NodeProps<EndNodeProps>) => {
+const EndNode = memo(({ data }: NodeProps) => {
   return (
     <div className="flex flex-col items-center">
       <Handle type="target" position={Position.Top} />

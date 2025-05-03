@@ -2,19 +2,9 @@
 import React, { memo } from 'react';
 import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Database, FileText, RotateCw, Mail } from 'lucide-react';
+import { ProcessNodeData } from './types';
 
-interface ProcessNodeProps {
-  data: {
-    label?: string;
-    subtitle?: string;
-    bgClass?: string;
-    iconName?: string;
-    color?: string;
-    type?: string;
-  }
-}
-
-const ProcessNode = memo(({ data }: NodeProps<ProcessNodeProps>) => {
+const ProcessNode = memo(({ data }: NodeProps) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName
