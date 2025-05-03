@@ -1,4 +1,3 @@
-
 import React, { useRef, useCallback } from 'react';
 import {
   ReactFlow,
@@ -76,7 +75,8 @@ const FlowCanvas: React.FC = () => {
           data: { 
             ...data,
             label: data.label,
-            icon: data.icon,
+            // Convert icon to iconName to match our ProcessNode component
+            iconName: data.icon ? data.icon : undefined,
           },
         };
 

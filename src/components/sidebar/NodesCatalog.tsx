@@ -2,17 +2,6 @@
 import React from 'react';
 import SidebarCategory from './SidebarCategory';
 import DraggableNode from './DraggableNode';
-import { 
-  Code, 
-  RotateCw, 
-  Terminal, 
-  Webhook, 
-  Database, 
-  Save, 
-  Mail,
-  FileX,
-  Layers
-} from 'lucide-react';
 
 const NodesCatalog: React.FC = () => {
   return (
@@ -22,44 +11,44 @@ const NodesCatalog: React.FC = () => {
           <DraggableNode 
             type="process" 
             label="Request" 
-            icon={<RotateCw size={18} />} 
+            icon="RotateCw"
           />
           <DraggableNode 
             type="process" 
             label="Event Transform" 
-            icon={<Layers size={18} />} 
+            icon="Layers"
           />
           <DraggableNode 
             type="process" 
             label="Data Imap" 
-            icon={<Database size={18} />}
+            icon="Database"
             className="card-border-blue"
           />
           <DraggableNode 
             type="process" 
             label="Code" 
-            icon={<Code size={18} />} 
+            icon="Code"
           />
           <DraggableNode 
             type="process" 
             label="Save to Story" 
-            icon={<Save size={18} />} 
+            icon="Save"
           />
           <DraggableNode 
             type="process" 
             label="Trigger" 
-            icon={<RotateCw size={18} />}
+            icon="RotateCw"
             isNew={true} 
           />
           <DraggableNode 
             type="process" 
             label="Webhook" 
-            icon={<Webhook size={18} />} 
+            icon="Webhook"
           />
           <DraggableNode 
             type="process" 
             label="Terminal" 
-            icon={<Terminal size={18} />} 
+            icon="Terminal"
           />
         </div>
       </SidebarCategory>
@@ -69,18 +58,18 @@ const NodesCatalog: React.FC = () => {
           <DraggableNode 
             type="process" 
             label="Execute Process" 
-            icon={<RotateCw size={18} />} 
+            icon="RotateCw"
           />
           <DraggableNode 
             type="process" 
             label="AI Doc Extraction" 
-            icon={<FileX size={18} />}
+            icon="FileText"
             className="lime-bg" 
           />
           <DraggableNode 
             type="process" 
             label="Update Salesforce" 
-            icon={<Database size={18} />} 
+            icon="Database"
           />
         </div>
       </SidebarCategory>
@@ -90,7 +79,7 @@ const NodesCatalog: React.FC = () => {
           <DraggableNode 
             type="process" 
             label="Send Email" 
-            icon={<Mail size={18} />}
+            icon="Mail"
             className="lime-bg" 
           />
         </div>
@@ -101,7 +90,7 @@ const NodesCatalog: React.FC = () => {
           <DraggableNode 
             type="process" 
             label="Sign Document" 
-            icon={<FileX size={18} />} 
+            icon="FileText"
           />
         </div>
       </SidebarCategory>

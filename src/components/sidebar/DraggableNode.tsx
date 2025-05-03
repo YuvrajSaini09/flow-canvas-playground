@@ -4,7 +4,7 @@ import React from 'react';
 interface DraggableNodeProps {
   type: string;
   label: string;
-  icon?: React.ReactNode;
+  icon?: string; // Changed to string to match our approach
   isNew?: boolean;
   className?: string;
 }
@@ -20,7 +20,7 @@ const DraggableNode: React.FC<DraggableNodeProps> = ({
     const nodeData = {
       type,
       label,
-      icon
+      iconName: icon // Use iconName instead of icon
     };
 
     event.dataTransfer.setData('application/reactflow', JSON.stringify(nodeData));

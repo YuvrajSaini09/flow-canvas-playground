@@ -7,8 +7,8 @@ const DiamondNode: React.FC<NodeProps> = ({ data }) => {
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />
       <div className="diamond-content">
-        <div>{data.label || ''}</div>
-        <small>{data.subtitle || ''}</small>
+        <div>{data?.label || ''}</div>
+        <small>{data?.subtitle || ''}</small>
       </div>
       <Handle type="source" position={Position.Bottom} />
     </div>

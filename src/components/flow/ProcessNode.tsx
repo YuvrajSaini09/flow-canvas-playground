@@ -4,11 +4,11 @@ import { Handle, Position, NodeProps } from '@xyflow/react';
 import { Database, FileText, RotateCw, Mail } from 'lucide-react';
 
 const ProcessNode: React.FC<NodeProps> = ({ data }) => {
-  const bgClass = data.bgClass || '';
+  const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName
   const renderIcon = () => {
-    if (!data.iconName) return null;
+    if (!data?.iconName) return null;
     
     switch (data.iconName) {
       case 'RotateCw':
@@ -27,14 +27,14 @@ const ProcessNode: React.FC<NodeProps> = ({ data }) => {
   return (
     <div className={`react-flow__node-process ${bgClass}`}>
       <Handle type="target" position={Position.Top} />
-      {data.iconName && (
-        <div className="node-icon" style={{ color: data.color || undefined }}>
+      {data?.iconName && (
+        <div className="node-icon" style={{ color: data?.color ? data.color : undefined }}>
           {renderIcon()}
         </div>
       )}
-      <div className="node-title">{data.label || ''}</div>
-      {data.subtitle && (
-        <div className="node-subtitle">{data.subtitle || ''}</div>
+      <div className="node-title">{data?.label || ''}</div>
+      {data?.subtitle && (
+        <div className="node-subtitle">{data.subtitle}</div>
       )}
       <Handle type="source" position={Position.Bottom} />
     </div>
