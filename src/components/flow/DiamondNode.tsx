@@ -6,18 +6,17 @@ import { Handle, Position, NodeProps } from '@xyflow/react';
 interface DiamondNodeData {
   label?: string;
   subtitle?: string;
+  branchId?: string;
 }
 
-// Create a custom props type that accepts our data shape
-type DiamondNodeProps = NodeProps<DiamondNodeData>;
-
-const DiamondNode = memo(({ data }: DiamondNodeProps) => {
+const DiamondNode = memo(({ data }: NodeProps<DiamondNodeData>) => {
   return (
     <div className="react-flow__node-diamond">
       <Handle type="target" position={Position.Top} />
       <div className="diamond-content">
         <div>{data?.label || ''}</div>
-        <small>{data?.subtitle || ''}</small>
+        {data?.subtitle && <small>{data.subtitle}</small>}
+        {data?.branchId && <small className="branch-id">{data.branchId}</small>}
       </div>
       <Handle type="source" position={Position.Bottom} />
     </div>

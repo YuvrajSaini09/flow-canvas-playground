@@ -1,4 +1,5 @@
-import React, { useRef, useCallback } from 'react';
+
+import React, { useRef, useCallback, useMemo } from 'react';
 import {
   ReactFlow,
   Background,
@@ -7,7 +8,8 @@ import {
   useReactFlow,
   BackgroundVariant,
   Node,
-  NodeTypes
+  NodeTypes,
+  MarkerType
 } from '@xyflow/react';
 import useStore from '../../store/useStore';
 import DiamondNode from './DiamondNode';
@@ -19,14 +21,6 @@ import DetailsPanel from '../panels/DetailsPanel';
 import RightToolbar from '../panels/RightToolbar';
 
 import '@xyflow/react/dist/style.css';
-
-// Define custom node types
-const nodeTypes: Record<string, React.ComponentType<any>> = {
-  diamond: DiamondNode,
-  process: ProcessNode,
-  start: StartNode,
-  end: EndNode,
-};
 
 const FlowCanvas: React.FC = () => {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
@@ -43,6 +37,14 @@ const FlowCanvas: React.FC = () => {
     showDetailsPanel,
     setShowDetailsPanel,
   } = useStore();
+
+  // Define nodeTypes using useMemo to prevent unnecessary re-renders
+  const nodeTypes = useMemo<NodeTypes>(() => ({
+    diamond: DiamondNode,
+    process: ProcessNode,
+    start: StartNode,
+    end: EndNode,
+  }), []);
 
   const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();

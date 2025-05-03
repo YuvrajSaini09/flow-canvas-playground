@@ -10,12 +10,10 @@ interface ProcessNodeData {
   bgClass?: string;
   iconName?: string;
   color?: string;
+  type?: string;
 }
 
-// Create a custom props type that accepts our data shape
-type ProcessNodeProps = NodeProps<ProcessNodeData>;
-
-const ProcessNode = memo(({ data }: ProcessNodeProps) => {
+const ProcessNode = memo(({ data }: NodeProps<ProcessNodeData>) => {
   const bgClass = data?.bgClass || '';
   
   // Function to render the appropriate icon based on iconName

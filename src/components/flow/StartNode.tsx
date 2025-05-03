@@ -7,10 +7,7 @@ interface StartNodeData {
   label?: string;
 }
 
-// Create a custom props type that accepts our data shape
-type StartNodeProps = NodeProps<StartNodeData>;
-
-const StartNode = memo(({ data }: StartNodeProps) => {
+const StartNode = memo(({ data }: NodeProps<StartNodeData>) => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-sm font-medium mb-2">{data?.label || ''}</div>

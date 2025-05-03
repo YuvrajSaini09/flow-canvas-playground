@@ -10,7 +10,8 @@ import {
   applyNodeChanges, 
   applyEdgeChanges, 
   addEdge,
-  Connection
+  Connection,
+  MarkerType
 } from '@xyflow/react';
 
 export type NodeData = {
@@ -66,7 +67,7 @@ const useStore = create<RFState>((set, get) => ({
           ...connection,
           animated: true,
           style: { strokeWidth: 2 },
-          markerEnd: { type: 'arrow' },
+          markerEnd: { type: MarkerType.Arrow },
         }, 
         get().edges
       ),
